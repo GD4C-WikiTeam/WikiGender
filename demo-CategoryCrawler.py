@@ -3,11 +3,6 @@ import datetime
 import Keegan
 reload(Keegan)
 
-#revisions = Keegan.get_page_revisions("Wedding_dress_of_Kate_Middleton",datetime.datetime.now() - datetime.timedelta(200),datetime.datetime.now(),"en")
-#page_categories = Keegan.get_page_categories("Wedding_dress_of_Kate_Middleton", "en")
-#category_members = Keegan.get_category_members("Category:Royal wedding dresses", 1, "en")
-#user = Keegan.get_user_properties("USERNAME","en")
-
 
 import datetime
 # Define categories to visit in each of the wikis

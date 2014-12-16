@@ -13,14 +13,15 @@ import datetime
 # Define categories to visit in each of the wikis
 categories = {
     # German
-    "de": [ "Kategorie:Frauengeschichte" ], # For some reason, the API returns a fault in here, even though this works:
+    "de": [ "Kategorie:Frauenmuseum" ], # 
+    # For some reason, the API returns a fault in here, even though this works:
 #    https://de.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Kategorie:Kultur
     # Portuguese
-    #"pt": [ "Categoria:Físicas"]#, "Categoria:Astrônomas" ]
+    "pt": [ "Categoria:Físicas", "Categoria:Astrônomas" ]
 }
 
 # Define ranges
-datestart = datetime.datetime.now() - datetime.timedelta( 2*365 )
+datestart = datetime.datetime.now() - datetime.timedelta( 1*365 ) #number of days
 dateend = datetime.datetime.now()
 
 revisions = {}

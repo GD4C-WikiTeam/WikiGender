@@ -359,6 +359,26 @@ def get_category_members(category_name, depth, lang='en'):
 
     return articles
 
+def get_random_pages(num, lang='en'):
+    '''
+    Input:
+    num - An interger of the number of random pages to return
+    lang - A string of the language to choose from
+    
+    Output:
+    Results - A dictionary of page information {u'20082460': {u'ns': 0, u'pageid': 20082460, u'title': u'Yoshinari Takagi'}}
+    '''
+    Results={}
+    while len(Results)< num:  
+        url='http://'+lang+'.wikipedia.org/w/api.php?'
+        w=wiki.Wiki(url=url)
+        query={'action':'query','generator':'random','grnnamespace':'0'}#'rnlimit':str(num),
+        request = api.APIRequest(w, query)
+        result=request.query()
+        Results.update(result['query']['pages'])
+    return Results
+
+
 def get_page_categories(page_title,lang='en'):
     '''
     Input:

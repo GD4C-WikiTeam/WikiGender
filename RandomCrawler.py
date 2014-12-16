@@ -1,4 +1,5 @@
 from wikitools import wiki, api
+import sys
 import datetime
 import Keegan
 reload(Keegan)
@@ -24,7 +25,6 @@ def get_random_pages(num, lang):
         Results.update(result['query']['pages'])
     return Results
 
-import datetime
 # Define categories to visit in each of the wikis
 #categories = {
 #    # German
@@ -75,7 +75,7 @@ for pageid,info in pages.iteritems():
     for rev in revisions[member]:
         # Get user info
         if "user" in rev: # Apparently, not all revisions have that...
-            api_users = Keegan.cast_to_unicodeget_user_properties(rev['user'], lang)
+            api_users = Keegan.get_user_properties(rev['user'], lang)
             user = api_users["users"][0]
             if "gender" in user:
                 if user['gender'] == "male":
@@ -95,7 +95,7 @@ for pageid,info in pages.iteritems():
             print rev
     # Print data
     sys.stdout.write( lang + ',' )
-    sys.stdout.write( '"' + cat + '",' )
+    #sys.stdout.write( '"' + cat + '",' )
     sys.stdout.write( '"' + member + '",' )
     sys.stdout.write( str(c_m) + ',' + str(c_f) + ',' + str(c_other) + ',' + str(c_unknown) + '\n' )
         

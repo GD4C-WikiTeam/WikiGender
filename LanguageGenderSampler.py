@@ -53,6 +53,7 @@ def gender_users_by_lang(langs,num_of_articles=10,years=10):
     genderDict={'male':0,'female':1,'unknown':-1}
     datestart = datetime.datetime.now() - datetime.timedelta( round(365*years) )
     dateend = datetime.datetime.now()
+    dones=set()
     #lang='en'
     for lang,langName in langs.iteritems():
         print langName
@@ -64,6 +65,10 @@ def gender_users_by_lang(langs,num_of_articles=10,years=10):
         for pageid,info in pages.iteritems():
             #Get title
             member=info['title']
+            if member in dones:
+                continue
+            else:
+                dones.update([member])
             # Revisions in page
             revisions=Keegan.get_page_revisions( member, datestart, dateend, lang )
             print " - revisions: " + str(len(revisions))

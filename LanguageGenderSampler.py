@@ -37,10 +37,21 @@ langs={'ar':'arabic','az':'Azərbaycanca','bg':'bulgarian','ca':'Català','cs':'
 
 
 def gender_users_by_lang(langs,num_of_articles=10,years=10):
+    '''
+    input -
+    langs: dictionary of languages and their common names (ie {'en':"Enlgish"})
+    num_of_articles: number of articles to randomly retrieve for each language
+    years: how far to go back in time to start pulling revisions.  Note, years can be <1; e.g. years=.5 or .083 for half year or month. 
+    
+    output -
+    userCounts = number of users editing the random pages by gender e.g. {'male':30,'female':134,'unknown':234}}
+    editCounts = number of edits made to the random pages by gender e.g. {'male':45,'female':1334,'unknown':2234}}
+    
+    '''
     userCounts={}
     editCounts={}
     genderDict={'male':0,'female':1,'unknown':-1}
-    datestart = datetime.datetime.now() - datetime.timedelta( 365*years )
+    datestart = datetime.datetime.now() - datetime.timedelta( round(365*years) )
     dateend = datetime.datetime.now()
     #lang='en'
     for lang,langName in langs.iteritems():
@@ -65,14 +76,11 @@ def gender_users_by_lang(langs,num_of_articles=10,years=10):
                         ucount[Users[user]]+=1
                     else:
                         Users[user]='unknown'
-                        ucount[Users[user]]=1
+                        ucount[Users[user]]+=1
             for rev in revisions:
             # Get user info
                 if 'user' in rev:
-                    if len(re.findall('\.',user))>2:
-                        g='unknown'
-                    else:
-                        g=Users[rev['user']]
+                    g=Users[rev['user']]
                     ecount[g]+=1
                 else:
                     print "rev without 'user'"

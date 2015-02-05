@@ -55,7 +55,9 @@ def gender_users_by_lang(langs,num_of_articles=10,years=10):
     dateend = datetime.datetime.now()
     dones=set()
     #lang='en'
+    l=-1
     for lang,langName in langs.iteritems():
+        l+=1
         print langName
         pages=Keegan.get_random_pages(num_of_articles,lang)
         Users={}
@@ -71,7 +73,7 @@ def gender_users_by_lang(langs,num_of_articles=10,years=10):
                 dones.update([member])
             # Revisions in page
             revisions=Keegan.get_page_revisions( member, datestart, dateend, lang )
-            print " - revisions: " + str(len(revisions))
+            print lang,' ', l,'\\', len(langs) ," - revisions: " + str(len(revisions))
             users=set([rev['user'] for rev in revisions if "user" in rev])
             for user in users:
                 if user not in Users.keys():
@@ -108,6 +110,6 @@ langs={'ar':'arabic','az':'Azərbaycanca','bg':'bulgarian','ca':'Català','cs':'
        'sr':'Српски / Srpski','sh':'Srpskohrvatski / Српскохрватски','fi':'Suomi','sv':'Svenska','tr':'Türkçe','uk':'Українська',
        'vi':'Tiếng Việt','vo':'Volapük','war':'Winaray','zh':' Zhōngwén'}
    
-userCounts,editCounts=gender_users_by_lang(langs,num_of_articles=200,years=20)
+userCounts,editCounts=gender_users_by_lang(langs,num_of_articles=500,years=20)
 #editCounts=gender_edits_by_lang(langs,num_of_articles=200,years=10)
 

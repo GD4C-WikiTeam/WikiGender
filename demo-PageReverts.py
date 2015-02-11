@@ -85,6 +85,7 @@ def get_page_reverts(page,lang='en',years=10.0,num=100):
     ties={}
     tagged=0
     inferred=0
+    total=0
     for i in xrange(len(hashes)):
         flag=0
         cur_user=versions[i]['user']
@@ -124,5 +125,5 @@ def get_page_reverts(page,lang='en',years=10.0,num=100):
     return tagged, inferred, ties,total
 
 page='YesAllWomen'
-tagged, inferred, ties=get_page_reverts(page,lang='en',years=10.0,num=100)
+tagged, inferred, ties, total=get_page_reverts(page,lang='en',years=10.0,num=100)
 
